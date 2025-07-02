@@ -1,0 +1,617 @@
+/* RESET BÁSICO E FONTES */
+/* Reseta margens, paddings e define box-sizing para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fonte padrão para o corpo */
+}
+
+/* Garante rolagem suave ao clicar em links de âncora */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Variáveis CSS para cores - Facilitam a manutenção e a consistência do tema */
+:root {
+    --primaria: #6d0839;
+    /* Vermelho vibrante - para títulos, destaques */
+    --segundaria: #ffa02e;
+    /* Laranja - para gradientes, detalhes secundários */
+    --escuro: #420521;
+    /* Vermelho escuro/Crimson - fundo principal da página */
+    --maisescuro: #8F042B;
+    /* Vermelho ainda mais escuro - fundo do rodapé e campos de input */
+    --claro: #E2D9C2;
+    /* Bege/Creme claro - texto principal */
+    --vidro: rgba(226, 217, 194, 0.2);
+
+}
+
+/* Estilo global do corpo da página */
+body {
+    background-color: var(--primaria);
+    /* Cor de fundo principal da página (o vermelho escuro/crimson) */
+    color: var(--claro);
+    /* Cor do texto padrão */
+}
+
+/* ESTILIZAÇÃO DO MENU DE NAVEGAÇÃO FIXO */
+.navegacao {
+    position: fixed;
+    /* Fixa o menu no topo da tela */
+    top: 0;
+    /* Alinha ao topo */
+    /* Fundo semi-transparente do menu usando o RGB da cor --escuro com 80% de opacidade */
+    background: rgba(66, 5, 33, 0.8);
+    width: 100%;
+    /* Ocupa a largura total */
+    z-index: 100;
+    /* Garante que o menu fique acima de outros elementos */
+    padding: 1.5rem;
+    /* Espaçamento interno */
+    backdrop-filter: blur(5px);
+    /* Efeito de desfoque para o fundo do menu (moderno) */
+}
+
+.menu {
+    display: flex;
+    /* Transforma a lista em um container flexbox */
+    justify-content: center;
+    /* Centraliza os itens horizontalmente */
+    list-style: none;
+    /* Remove os marcadores de lista (bolinhas) */
+    gap: 3rem;
+    /* Espaçamento entre os itens do menu */
+    flex-wrap: wrap;
+    /* Permite que os itens quebrem a linha em telas menores */
+}
+
+.menu-link {
+    text-decoration: none;
+    /* Remove o sublinhado dos links */
+    color: var(--claro);
+    /* Cor do texto do link */
+    font-weight: 500;
+    /* Peso da fonte (semi-negrito) */
+    position: relative;
+    /* Necessário para posicionar o pseudo-elemento ::after */
+    padding: 0.5rem 0;
+    /* Espaçamento interno vertical */
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    /* Tamanho de fonte fluido */
+}
+
+/* Efeito de linha sob o link ao passar o mouse */
+.menu-link::after {
+    content: '';
+    /* Conteúdo vazio para o pseudo-elemento */
+    height: 2px;
+    /* Altura da linha */
+    width: 0%;
+    /* Largura inicial da linha (invisível) */
+    position: absolute;
+    /* Posiciona a linha em relação ao link */
+    bottom: 0;
+    /* Alinha a linha na parte inferior do link */
+    left: 0;
+    /* Começa a linha da esquerda */
+    background: linear-gradient(90deg, var(--primaria), var(--segundaria));
+    /* Gradiente de cor para a linha */
+    transition: width 0.5s ease;
+    /* Transição suave para o efeito de largura */
+}
+
+.menu-link:hover::after {
+    width: 100%;
+    /* Expande a linha para 100% da largura do link ao passar o mouse */
+}
+
+/* ESTILIZAÇÃO DO CABEÇALHO (<HEADER>) */
+/* Esta seção é o <header> que contém o nome, foto e frase de impacto */
+.cabecalho {
+    min-height: 100vh;
+    /* Ocupa pelo menos 100% da altura da viewport */
+    display: flex;
+    /* Transforma em flexbox para alinhamento */
+    justify-content: center;
+    /* Centraliza verticalmente */
+    align-items: center;
+    /* Centraliza horizontalmente */
+    flex-direction: column;
+    /* Empilha os itens verticalmente */
+    padding-top: 5rem;
+    /* Espaço para o menu fixo */
+    text-align: center;
+    /* Garante que o texto dentro do cabeçalho esteja centralizado */
+}
+
+.foto-perfil {
+    width: clamp(200px, 30vw, 300px);
+    /* Largura fluida entre 200px e 300px */
+    height: clamp(350px, 30vw, 300px);
+    /* Altura fluida para manter o círculo */
+    box-shadow: 0 0 20px var(--maisescuro);
+    /* Sombra para a foto (nova cor - var(--primaria) com alfa) */
+    border-radius: 50%;
+    /* Torna a foto circular */
+    border: 3px solid var(--vidro);
+
+    /* Borda com efeito de vidro (nova cor) */
+    object-fit: cover;
+    /* Garante que a imagem preencha o círculo sem distorção */
+animation: flutuar 5s ease-in-out infinite;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    /* Tamanho de fonte fluido para o nome */
+    color: var(--segundaria);
+    /* Cor principal para o nome (nova cor) */
+
+    font-weight: bold;
+    /* Peso da fonte negrito */
+    margin: 20px;
+    /* Margem ao redor do nome */
+    font-family: 'Lora', serif;
+    /* Fonte personalizada para o nome */
+}
+
+.cabecalho-sub-titulo {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    /* Tamanho de fonte fluido para a frase */
+    color: var(--claro);
+    /* Cor clara para a frase (nova cor) */
+    max-width: 80%;
+    /* Limita a largura para melhor leitura */
+    margin: 0 auto;
+    /* Centraliza a frase se ela quebrar a linha */
+}
+
+/* ESTILIZAÇÃO DO CORPO PRINCIPAL (<MAIN>) */
+/* Esta classe envolve todas as seções de conteúdo (Sobre, Projetos, Habilidades, Conexões, Contato) */
+.conteudo-principal {
+    /* Não precisa de estilos específicos aqui, as sections internas têm seus próprios paddings. */
+}
+
+/* ESTILIZAÇÃO PADRÃO PARA TÍTULOS DE SEÇÃO */
+/* Aplicado a todos os <h2> de seção para consistência */
+.sobre-titulo,
+.projetos-titulo,
+.habilidades-titulo,
+.conexoes-titulo,
+.contato-titulo {
+    text-align: center;
+    /* Centraliza o título */
+    font-size: clamp(2rem, 5vw, 3rem);
+    /* Tamanho de fonte fluido para os títulos de seção */
+    margin-bottom: 50px;
+    /* Margem abaixo do título */
+    color: var(--claro);
+    /* Cor do título (nova cor) */
+    padding-top: 6rem;
+    /* Espaçamento superior para todas as seções */
+}
+
+/* ESTILIZAÇÃO PADRÃO PARA CAIXAS DE CONTEÚDO */
+/* Aplicado a .sobre-caixa, .projetos-movie, .habilidade-card, .link-extra-card, .formulario-contato */
+.caixa-padrao {
+    background: rgba(226, 217, 194, 0.05);
+    /* Fundo semi-transparente (nova cor var(--claro) com alfa) */
+    border-radius: 16px;
+    /* Bordas arredondadas */
+    backdrop-filter: blur(5px);
+    /* Efeito de desfoque */
+    border: 1px solid var(--vidro);
+    /* Borda com efeito de vidro (nova cor) */
+    padding: 2rem;
+    /* Espaçamento interno padrão */
+}
+
+/* Estilo para cards interativos (Projetos, Habilidades, Conexões) */
+.card-interativo {
+    transition: all 0.5s ease;
+    /* Transição suave para efeitos de hover */
+    cursor: pointer;
+    /* Muda o cursor para indicar que é clicável */
+    overflow: hidden;
+    /* Garante que o conteúdo não transborde das bordas arredondadas */
+}
+
+.card-interativo:hover {
+    box-shadow: 0 10px 20px rgba(232, 53, 53, 0.2);
+    /* Sombra ao passar o mouse (nova cor - var(--primaria) com alfa) */
+    transform: translateY(-10px) scale(1.05);
+    /* Levanta e aumenta o card */
+}
+
+/* ESTILIZAÇÃO SEÇÃO "SOBRE MIM" */
+.sobre {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 6rem;
+}
+
+/* Contêiner para o texto e animação (com o visual de "card de vidro" suave) */
+.sobre-conteudo-direto {
+    display: flex;
+    /* Habilita o Flexbox */
+    flex-direction: row;
+    /* Alinha os itens (parágrafo e animação) lado a lado por padrão */
+    align-items: center;
+    /* Centraliza os itens verticalmente */
+    gap: 3rem;
+    /* Espaçamento entre o texto e a animação */
+    flex-wrap: wrap;
+    /* Permite que os itens quebrem para a próxima linha em telas menores */
+    justify-content: center;
+    /* Centraliza os itens quando eles quebram a linha */
+    max-width: 1200px;
+    /* Largura máxima para este contêiner flex */
+    margin: 0 auto;
+    /* Centraliza este contêiner na página */
+
+    /* PROPRIEDADES DO VISUAL DE CAIXA SUAVE: */
+    background: rgba(226, 217, 194, 0.03);
+    /* Fundo mais transparente e sutil (nova cor) */
+    border-radius: 20px;
+    /* Bordas um pouco mais arredondadas */
+    backdrop-filter: blur(15px);
+    /* Desfoque mais intenso para o efeito de vidro */
+    /* border: 1px solid rgba(226, 217, 194, 0.1); */
+    /* Borda sutil (opcional) */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    /* Sombra mais difusa para dar profundidade */
+    padding: 3rem 2.5rem;
+    /* Aumenta o padding interno para mais respiro */
+}
+
+.sobre-paragrafo {
+    text-align: left;
+    /* Alinha o texto à esquerda dentro de sua "coluna" */
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    /* Fonte um pouco maior e mais fluida */
+    line-height: 1.7;
+    /* Mais espaçamento entre as linhas para melhor leitura */
+    flex: 1;
+    /* Permite que o parágrafo ocupe o espaço disponível */
+    min-width: 300px;
+    /* Largura mínima para o parágrafo antes de quebrar a linha */
+    max-width: 600px;
+    /* Limita a largura máxima do texto para não ficar muito longo */
+    color: var(--claro);
+    /* Cor do texto padrão (nova cor) */
+}
+
+/* Ajustar o estilo da animação Lottie para se encaixar na coluna */
+.lottie-animacao {
+    width: clamp(280px, 35vw, 550px);
+    /* Tamanho da animação um pouco maior e mais fluido */
+    height: clamp(280px, 35vw, 550px);
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/* Ajustes de responsividade específicos para a seção "Sobre Mim" */
+@media (max-width: 768px) {
+    .sobre-conteudo-direto {
+        flex-direction: column;
+        /* Empilha o texto e a animação verticalmente */
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+        /* Ajusta padding para telas menores */
+    }
+
+    .sobre-paragrafo {
+        text-align: center;
+        /* Centraliza o texto quando empilhado */
+        width: 100%;
+        min-width: unset;
+        font-size: clamp(0.9rem, 4vw, 1rem);
+        /* Ajuste de fonte para mobile */
+    }
+
+    .lottie-animacao {
+        width: clamp(250px, 60vw, 400px);
+        /* Ajusta o tamanho da animação para mobile */
+        height: clamp(250px, 60vw, 400px);
+    }
+}
+
+/* ESTILIZAÇÃO SEÇÃO "PROJETOS" */
+.projetos {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 6rem;
+}
+
+.projetos-caixa {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 90vw, 350px), 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projetos-movie {
+border: none;    /* Mantém a borda específica para projetos (nova cor) */
+    padding: 0;
+}
+
+.projetos-imagem {
+    height: clamp(180px, 20vw, 250px);
+    width: 100%;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+}
+
+.caixa-textos-projeto {
+    padding: 1.5rem;
+}
+
+.info-projetos {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--claro);
+    /* Cor do título do projeto (nova cor) */
+    margin-bottom: 0.5rem;
+}
+
+.paragrafo-projetos {
+    color: rgba(226, 217, 194, 0.8);
+    /* Cor do texto do parágrafo (baseado em --claro, nova cor) */
+    line-height: 1.5;
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+}
+
+/* ESTILIZAÇÃO SEÇÃO "HABILIDADES" */
+.habilidades {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 6rem;
+}
+
+.habilidades-caixa {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 20vw, 180px), 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.habilidade-card {
+    border: none;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 200px;
+}
+
+.habilidade-icone {
+    width: clamp(60px, 10vw, 90px);
+    height: clamp(60px, 10vw, 90px);
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+/* ESTILO ESPECÍFICO PARA O ÍCONE PYTHON */
+.habilidade-icone.python-icone {
+    width: clamp(70px, 11vw, 100px);
+    height: clamp(70px, 11vw, 100px);
+}
+
+.habilidade-nome {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--claro);
+    /* Cor do nome da habilidade (nova cor) */
+    font-weight: 600;
+}
+
+/* ESTILIZAÇÃO SEÇÃO "CONEXÕES" (INFORMAÇÕES EXTRAS) */
+.conexoes-section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 6rem;
+}
+
+.conexoes-caixa {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.link-extra-card {
+    border: none;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 180px;
+}
+
+.link-extra {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.link-extra-icone {
+    width: clamp(70px, 10vw, 90px);
+    height: clamp(70px, 10vw, 90px);
+    object-fit: contain;
+    margin-bottom: 0.8rem;
+}
+
+/* Ajustes específicos para as logos de redes sociais */
+.link-extra-icone.github-logo,
+.link-extra-icone.instagram-logo,
+.link-extra-icone.linkedin-logo {
+    width: clamp(80px, 12vw, 100px);
+    height: clamp(80px, 12vw, 100px);
+}
+
+.link-extra-nome {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: var(--claro);
+    /* Cor do nome do link (nova cor) */
+    font-weight: 600;
+}
+
+
+/* ESTILIZAÇÃO DO RODAPÉ */
+.rodape {
+    background-color: var(--escuro);
+    /* Cor de fundo mais escura (nova cor) */
+    color: var(--claro);
+    /* Cor do texto (nova cor) */
+    padding: 3rem 2rem;
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.rodape-conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.rodape-contato h3 {
+    color: var(--segundaria);
+    /* Cor do título "Entre em Contato" (nova cor) */
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.rodape-contato p {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.rodape-link-email {
+    color: var(--claro);
+    /* Cor do link do email (nova cor) */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.rodape-link-email:hover {
+    color: var(--vidro);
+    /* Muda a cor ao passar o mouse (nova cor) */
+}
+
+.rodape-direitos {
+    flex-basis: auto;
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+    opacity: 0.7;
+}
+
+/* RESPONSIVIDADE GERAL COM MÍNIMAS MEDIA QUERIES */
+
+/* Ajustes finos para telas menores que 768px (smartphones e tablets pequenos) */
+@media (max-width: 768px) {
+    .navegacao {
+        padding: 1rem;
+    }
+
+    .menu {
+        gap: 1rem;
+        justify-content: space-around;
+    }
+
+    .cabecalho {
+        padding-top: 4rem;
+    }
+
+    .foto-perfil {
+        width: clamp(150px, 40vw, 200px);
+        height: clamp(150px, 40vw, 200px);
+    }
+
+    .rodape-conteudo {
+        flex-direction: column;
+        /* Força empilhamento em telas menores para melhor leitura */
+        align-items: center;
+    }
+
+    .rodape-direitos {
+        text-align: center;
+    }
+}
+
+/* Ajustes para telas muito pequenas (abaixo de 480px) */
+@media (max-width: 480px) {
+    .menu {
+        gap: 0.75rem;
+    }
+
+    .habilidades-caixa,
+    .conexoes-caixa {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 1rem;
+    }
+
+    .habilidade-icone,
+    .link-extra-icone {
+        width: clamp(50px, 15vw, 70px);
+        height: clamp(50px, 15vw, 70px);
+    }
+
+    .link-extra-icone.python-icone,
+    .link-extra-icone.github-logo,
+    .link-extra-icone.instagram-logo,
+    .link-extra-icone.linkedin-logo {
+        width: clamp(60px, 18vw, 80px);
+        height: clamp(60px, 18vw, 80px);
+    }
+}
+
+.particulas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.7;
+    /* Opacidade um pouco maior para um efeito mais presente */
+    background: radial-gradient(circle at 10% 10%, var(--maisescuro) 0%, transparent 20%),
+        /* Superior Esquerdo: Vermelho vibrante */
+        radial-gradient(circle at 90% 90%, var(--maisescuro) 0%, transparent 20%),
+        /* Inferior Direito: Bege/Creme (outro ponto de luz) */
+        var(--escuro);
+    /* Fundo principal: Vermelho escuro/Crimson */
+}
+
+@keyframes flutuar {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+}
