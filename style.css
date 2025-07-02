@@ -531,7 +531,7 @@ border: none;    /* Mantém a borda específica para projetos (nova cor) */
 /* Ajustes finos para telas menores que 768px (smartphones e tablets pequenos) */
 @media (max-width: 768px) {
     .navegacao {
-        padding: 1rem;
+        padding: 0.5rem;
     }
 
     .menu {
@@ -544,10 +544,10 @@ border: none;    /* Mantém a borda específica para projetos (nova cor) */
     }
 
     .foto-perfil {
-        width: clamp(150px, 40vw, 200px);
-        height: clamp(150px, 40vw, 200px);
+        /* Novos valores para mobile: MAIOR e OVALADA */
+        width: clamp(220px, 60vw, 300px); /* Aumenta o mínimo e o %vw para ser maior */
+        height: clamp(300px, 80vw, 400px); /* Aumenta o mínimo e o %vw para ser maior e mais oval */
     }
-
     .rodape-conteudo {
         flex-direction: column;
         /* Força empilhamento em telas menores para melhor leitura */
