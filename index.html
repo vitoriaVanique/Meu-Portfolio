@@ -18,6 +18,11 @@
     <div class="particulas"></div>
 
     <nav class="navegacao">
+        <button class="menu-hamburguer" aria-label="Abrir menu">
+            <span class="hamburguer-linha"></span>
+            <span class="hamburguer-linha"></span>
+            <span class="hamburguer-linha"></span>
+        </button>
         <ul class="menu">
             <li>
 
@@ -218,7 +223,31 @@
 
 
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuHamburguer = document.querySelector('.menu-hamburguer');
+            const menu = document.querySelector('.menu');
+            const menuLinks = document.querySelectorAll('.menu-link');
 
+            if (menuHamburguer && menu) {
+                menuHamburguer.addEventListener('click', function () {
+                    menu.classList.toggle('menu-aberto');
+                    menuHamburguer.classList.toggle('menu-aberto'); // Adiciona a classe para animação do X
+                });
+
+                // Fecha o menu ao clicar em um link (útil para menus de página única)
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        if (window.innerWidth <= 768) { // Só fecha se estiver em mobile
+                            menu.classList.remove('menu-aberto');
+                            menuHamburguer.classList.remove('menu-aberto');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
