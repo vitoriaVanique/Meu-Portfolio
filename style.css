@@ -381,7 +381,195 @@ h1 {
 
 /* --- COMEÇO DAS MEDIA QUERIES PARA MOBILE --- */
 
-@media (max-width: 768px) 
+@media (max-width: 768px) {
+    /* --- NAVEGACAO MOBILE --- */
+    .navegacao {
+        /* Adapta o padding da navegação para mobile */
+        padding: 1rem 1.5rem;
+        /* Alinha o menu hambúrguer à direita */
+        justify-content: flex-end;
+        /* Garante que o nav seja um flex container para o hambúrguer */
+        display: flex;
+        align-items: center;
+    }
+    .menu-link::after {
+        content: '';
+        height: 2px;
+        width: 0%;
+        position: absolute;
+        bottom: 15px; /* Esta linha é a que precisamos ajustar */
+        left: 0;
+        background: linear-gradient(90deg, var(--primaria), var(--segundaria));
+        transition: width 0.5s ease;
+    }
+    .menu-link:active::after, /* Adicionado vírgula para combinar seletores */
+    .menu-link:focus::after {
+        width: 100%;
+    }
+
+    /* Exibe o botão hambúrguer no mobile */
+    .menu-hamburguer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 101; /* Garante que fique acima do menu */
+        position: relative;
+    }
+
+    .hamburguer-linha {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--claro);
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Animação do X quando o menu está aberto */
+    .menu-hamburguer.menu-aberto .hamburguer-linha:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-hamburguer.menu-aberto .hamburguer-linha:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-hamburguer.menu-aberto .hamburguer-linha:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Estilo do menu quando oculto no mobile */
+    .menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Inicia fora da tela */
+        width: 100%;
+        height: 100vh;
+        background-color: var(--escuro);
+        flex-direction: column; /* Itens do menu empilhados */
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: left 0.4s ease-in-out;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        /* IMPORTANTE: Garante que o menu esteja oculto e não interfira no desktop */
+        display: flex; /* Mantém como flex para os itens internos, mas controlamos a visibilidade pelo 'left' */
+    }
+
+    /* Estilo do menu quando aberto no mobile */
+    .menu.menu-aberto {
+        left: 0; /* Desliza para dentro da tela */
+    }
+
+    .menu-link {
+        font-size: clamp(1.2rem, 6vw, 1.8rem);
+        padding: 1rem 0;
+    }
+
+    /* --- CABECALHO MOBILE (baseado na sua solicitação anterior) --- */
+    .cabecalho {
+        /* Remove o padding-top e padding-bottom fixos */
+        padding-top: 0;
+        padding-bottom: 0;
+        /* Ajusta a altura mínima para ser a altura da viewport menos a altura da navegação */
+        /* Supondo que a altura da navegação seja ~60px (1rem padding top + 1rem padding bottom + altura do conteúdo) */
+        min-height: calc(100vh - 60px); /* Ajuste 60px se sua navegação tiver outra altura */
+        
+        /* Centraliza o conteúdo verticalmente */
+        justify-content: center; /* Era flex-start, mudamos para center */
+        
+        /* Outras propriedades que já estavam */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem; /* Mantém o espaçamento entre a foto e o texto */
+    }
+
+    .foto-perfil {
+        /* Ajustes de tamanho e forma para mobile */
+        width: clamp(200px, 50vw, 250px);
+        height: clamp(250px, 50vw, 250px);
+        object-fit: cover;
+        /* Remove o margin-top, pois a centralização via flexbox no pai cuidará disso */
+        margin-top: 0; /* Mantenha esta linha ou remova-a, pois já era 0, mas é bom para clareza */
+    }
+
+    h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        margin: 0 0 5px 0;
+    }
+
+    .cabecalho-sub-titulo {
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+        max-width: 90%;
+        margin: 0 auto 20px auto;
+    }
+
+    /* --- OUTRAS SEÇÕES (mantendo seus ajustes mobile anteriores) --- */
+    .rodape-conteudo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rodape-direitos {
+        text-align: center;
+    }
+
+    .sobre-conteudo-direto {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .sobre-paragrafo {
+        text-align: center;
+        width: 100%;
+        min-width: unset;
+        font-size: clamp(0.9rem, 4vw, 1rem);
+    }
+
+    .lottie-animacao {
+        width: clamp(250px, 60vw, 400px);
+        height: clamp(250px, 60vw, 400px);
+    }
+
+    .projetos-caixa {
+        grid-template-columns: 1fr;
+    }
+
+    .habilidades-caixa,
+    .conexoes-caixa {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .habilidade-card,
+    .link-extra-card {
+        max-width: 150px;
+    }
+
+    .habilidade-icone,
+    .link-extra-icone {
+        width: clamp(50px, 15vw, 70px);
+        height: clamp(50px, 15vw, 70px);
+    }
+
+    .habilidade-icone.python-icone,
+    .link-extra-icone.github-logo,
+    .link-extra-icone.instagram-logo,
+    .link-extra-icone.linkedin-logo {
+        width: clamp(60px, 18vw, 80px);
+        height: clamp(60px, 18vw, 80px);
+    }
+}@media (max-width: 768px) 
 
 {
     /* --- NAVEGACAO MOBILE --- */
@@ -477,16 +665,16 @@ transition: width 0.5s ease;
     }
 
     /* --- CABECALHO MOBILE (baseado na sua solicitação anterior) --- */
-    .cabecalho {
-        /* Mantém as regras que você queria para o cabeçalho no mobile */
+   .cabecalho {
+        display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-top: 4rem;
+        justify-content: center; /* Centraliza verticalmente */
+        align-items: center; /* Centraliza horizontalmente */
         text-align: center;
         gap: 1.5rem;
-        min-height: auto;
-        padding-bottom: 2rem;
+        min-height: 100vh; /* Ocupa a altura total da tela */
+        padding-top: 4rem; /* Adiciona um espaço superior para evitar o overlap da navegação */
+        box-sizing: border-box; /* Garante que o padding não aumente a altura total */
     }
 
     .foto-perfil {
@@ -541,15 +729,26 @@ transition: width 0.5s ease;
         grid-template-columns: 1fr;
     }
 
-    .habilidades-caixa,
-    .conexoes-caixa {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 1.5rem;
+    .habilidades-caixa {/* Remova as regras de .habilidades-caixa, .conexoes-caixa combinadas e adicione esta */
+        grid-template-columns: repeat(4, 1fr); /* Tenta criar 4 colunas de tamanho igual */
+        gap: 1rem; /* Reduz o espaçamento para caber mais */
+        max-width: unset; /* Remove o max-width para que ele se ajuste à tela */
+        padding: 0 1rem; /* Adiciona um padding nas laterais para não grudar nas bordas */
     }
 
+    .conexoes-caixa {
+        display: grid; /* Garante que seja um grid container */
+        grid-template-columns:minmax(3); /* Cria 3 colunas de largura igual */
+        gap: 1rem; /* Ajuste o espaçamento conforme necessário */
+        max-width: unset; /* Permite que o container ocupe a largura total */
+        padding: 0 1rem; /* Adiciona um pequeno padding nas laterais, se desejar */
+    }
+    
+
     .habilidade-card,
-    .link-extra-card {
-        max-width: 150px;
+    .link-extra-card  {
+        max-width: unset; /* Permite que os cards se ajustem às colunas */
+        width: 100%; /* Garante que ocupem a largura total da célula do grid */
     }
 
     .habilidade-icone,
@@ -579,9 +778,9 @@ transition: width 0.5s ease;
 
     .habilidades-caixa,
     .conexoes-caixa {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        gap: 1rem;
-    }
+            grid-template-columns: repeat(2, 1fr); /* Em telas menores, volta para 2 colunas */
+            gap: 0.8rem;
+        }
 
     .habilidade-icone,
     .link-extra-icone {
